@@ -2,7 +2,7 @@ package common
 
 import (
 	"context"
-	"log"
+	"errors"
 	"os"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -18,7 +18,7 @@ func GetDBCollection(col string) *mongo.Collection {
 func InitDB() error {
 	uri := os.Getenv("MONGODB_URI")
 	if uri == "" {
-		log.Fatal("You must set your 'MONGODB_URI' environmental variable. See\n\t https://www.mongodb.com/docs/drivers/go/current/usage-examples/#environment-variable")
+		return errors.New("you must set your 'MONGODB_URI' environmental variable. See\n\t https://www.mongodb.com/docs/drivers/go/current/usage-examples/#environment-variable")
 	}
 	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(uri))
 	if err != nil {

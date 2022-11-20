@@ -48,7 +48,7 @@ func run() error {
 
 	// start server
 	var port string
-	if port = os.Getenv("PORT"); port != "" {
+	if port = os.Getenv("PORT"); port == "" {
 		port = "8080"
 	}
 	app.Listen(":" + port)
